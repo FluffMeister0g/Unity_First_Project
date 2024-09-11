@@ -9,12 +9,13 @@ public class PlayerControler : MonoBehaviour
     Vector2 camRotation;
 
     public float speed = 10f;
-    public float jumpHeight = 5f;
+    public float jumpHeight = 8f;
     //mouse movement
     public float mouseSensitivity = 2.0f;
     public float xSensitivity = 2.0f;
     public float ySensitivity = 2.0f;
     public float camRotationLimit = 90f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +45,7 @@ public class PlayerControler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             temp.y = jumpHeight;
         myRB.velocity = (transform.forward * temp.z) + (transform.right * temp.x) + (transform.up * temp.y);
-        
+        //attempt to limit jumping
+
     }
 }
