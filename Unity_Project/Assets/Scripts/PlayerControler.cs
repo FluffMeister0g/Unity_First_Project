@@ -10,12 +10,14 @@ public class PlayerControler : MonoBehaviour
 
     public float speed = 10f;
     public float jumpHeight = 8f;
+    public Vector3 boxsize;
+    public float maxDistance;
+    public LayerMask layermask;
     //mouse movement
     public float mouseSensitivity = 2.0f;
     public float xSensitivity = 2.0f;
     public float ySensitivity = 2.0f;
     public float camRotationLimit = 90f;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,7 @@ public class PlayerControler : MonoBehaviour
         Cursor.visible = false;
         camRotation = Vector2.zero;
         Cursor.lockState = CursorLockMode.Confined;
+       
     }
 
     // Update is called once per frame
@@ -42,10 +45,30 @@ public class PlayerControler : MonoBehaviour
         Vector3 temp = myRB.velocity;
         temp.x = Input.GetAxisRaw("Horizontal") * speed;
         temp.z = Input.GetAxisRaw("Vertical") * speed;
-        if (Input.GetKeyDown(KeyCode.Space))
-            temp.y = jumpHeight;
-        myRB.velocity = (transform.forward * temp.z) + (transform.right * temp.x) + (transform.up * temp.y);
-        //attempt to limit jumping
-
+        
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+                temp.y = jumpHeight;
+            myRB.velocity = (transform.forward * temp.z) + (transform.right * temp.x) + (transform.up * temp.y);
+           
+        }
+            //attempt to limit jumping
+            void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawCube(transform.position - transform.up * maxDistance, boxsize);
+        }
+            bool GroundCheck()
+        {
+         if(Physics.BoxCast(transform.position,boxsize,-transform.up,transform.rotation,maxDistance,layermask))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
     }
 }
