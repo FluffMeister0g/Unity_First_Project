@@ -8,8 +8,15 @@ public class PlayerControler : MonoBehaviour
     Camera playercam;
     Vector2 camRotation;
 
+
+    [Header("Movement Stats")]
+    public float sprintmult = 1.5f;
+    public bool sprinting = false;
+    public float groundDetection = 1f;
     public float speed = 10f;
     public float jumpHeight = 8f;
+    [Header("User Settings")]
+    public bool sprintToggle = false;
     public Vector3 boxsize;
     public float maxDistance;
     public LayerMask layermask;
@@ -41,34 +48,29 @@ public class PlayerControler : MonoBehaviour
 
         playercam.transform.localRotation = Quaternion.AngleAxis(camRotation.y, Vector3.left);
         transform.localRotation = Quaternion.AngleAxis(camRotation.x, Vector3.up);
+        if (!sprinting && !sprintToggle && Input.GetKey(KeyCode.LeftShift))
+            sprinting = true;
+        if (!sprinting && sprintToggle && (Input.GetAxisRaw("Vertical") > 0) && Input.GetKey(KeyCode.LeftShift))
+                sprinting = true;
+        
         // movement movement
         Vector3 temp = myRB.velocity;
         temp.x = Input.GetAxisRaw("Horizontal") * speed;
         temp.z = Input.GetAxisRaw("Vertical") * speed;
-        
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
+
+            if (Input.GetKeyDown(KeyCode.Space) && Physics.Raycast(transform.position, -transform.up, groundDetection))
                 temp.y = jumpHeight;
-            myRB.velocity = (transform.forward * temp.z) + (transform.right * temp.x) + (transform.up * temp.y);
-           
-        }
-            //attempt to limit jumping
-            void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawCube(transform.position - transform.up * maxDistance, boxsize);
-        }
-            bool GroundCheck()
-        {
-         if(Physics.BoxCast(transform.position,boxsize,-transform.up,transform.rotation,maxDistance,layermask))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+
+        //sprinting
+        if (sprinting)
+            temp.z *= sprintmult;
+        if (sprinting && !sprintToggle && Input.GetKeyUp(KeyCode.LeftShift))
+            sprinting = false;
+        if (sprinting && sprintToggle && (Input.GetAxisRaw("Vertical") <= 0))
+            sprinting = false;
+
+        myRB.velocity = (transform.forward * temp.z) + (transform.right * temp.x) + (transform.up * temp.y);
+
         
     }
 }

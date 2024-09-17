@@ -428,8 +428,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2492ec1938eee5c4ca46d3272f63b8a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprintmult: 2
+  sprinting: 0
+  groundDetection: 1
   speed: 10
   jumpHeight: 5
+  sprintToggle: 0
   boxsize: {x: 1, y: 0.2, z: 1}
   maxDistance: 1
   layermask:
