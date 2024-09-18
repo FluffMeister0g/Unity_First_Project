@@ -8,6 +8,13 @@ public class PlayerControler : MonoBehaviour
     Camera playercam;
     Vector2 camRotation;
 
+    [Header("Player Stats")]
+    public int health = 5;
+    public int maxHealth = 10;
+    public int healthPickupAmt = 5;
+    [Header("Weapon Stats")]
+    public Transform weaponSlot;
+
 
     [Header("Movement Stats")]
     public float sprintmult = 1.5f;
@@ -72,5 +79,24 @@ public class PlayerControler : MonoBehaviour
         myRB.velocity = (transform.forward * temp.z) + (transform.right * temp.x) + (transform.up * temp.y);
 
         
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if ((collision.gameObject.tag == "Pickup") && health < maxHealth)
+        {
+            if (health + healthPickupAmt > maxHealth)
+                health = maxHealth;
+            else health += healthPickupAmt;
+            Destroy(collision.gameObject);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Weapon")
+        {
+            other.transform.position = weaponSlot.position;
+            other.transform.rotation = weaponSlot.rotation;
+            other.transform.SetParent(weaponSlot);
+        }
     }
 }
