@@ -146,6 +146,29 @@ public class PlayerControler : MonoBehaviour
                     break;
             }
         }
+        if (other.gameObject.tag == "Weapon1")
+        {
+            other.transform.position = weaponSlot.position;
+            other.transform.rotation = weaponSlot.rotation;
+            other.transform.SetParent(weaponSlot);
+
+            switch (other.gameObject.name)
+            {
+                case "Weapon2":
+                    weaponID = 1;
+                    shotVel = 10000;
+                    fireMode = 0;
+                    fireRate = 0.00001f;
+                    currentClip = 50;
+                    currentAmmo = 200;
+                    reloadAmt = 50;
+                    bulletLifespan = .1f;
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
     public void reloadClip()
     {
