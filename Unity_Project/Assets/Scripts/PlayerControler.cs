@@ -158,7 +158,7 @@ public class PlayerControler : MonoBehaviour
                     weaponID = 1;
                     shotVel = 10000;
                     fireMode = 0;
-                    fireRate = 0.00001f;
+                    fireRate = 0.00000000000001f;
                     currentClip = 50;
                     currentAmmo = 200;
                     reloadAmt = 50;
