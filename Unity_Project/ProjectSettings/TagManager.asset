@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - bullet
   - Weapon1
+  - Weapon2
   layers:
   - Default
   - TransparentFX
