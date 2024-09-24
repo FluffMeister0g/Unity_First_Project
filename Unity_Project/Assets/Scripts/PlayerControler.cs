@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerControler : MonoBehaviour
 {
     Rigidbody myRB;
@@ -9,6 +9,8 @@ public class PlayerControler : MonoBehaviour
     Vector2 camRotation;
 
     [Header("Player Stats")]
+    public bool takenDamage = false;
+    public float damageCooldownTimer = 1f;
     public int health = 5;
     public int maxHealth = 10;
     public int healthPickupAmt = 5;
@@ -57,6 +59,8 @@ public class PlayerControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (health <= 0)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
        // camera movement
         Quaternion mouseLook = playercam.transform.rotation;
         camRotation.x += Input.GetAxisRaw("Mouse X") * mouseSensitivity;
@@ -195,4 +199,10 @@ public class PlayerControler : MonoBehaviour
         yield return new WaitForSeconds(fireRate);
         canFire = true;
     }
+    IEnumerator cooldownDamage()
+    {
+        yield return new WaitForSeconds(damageCooldownTimer);
+        takenDamage = false;
+    }
 }
+
