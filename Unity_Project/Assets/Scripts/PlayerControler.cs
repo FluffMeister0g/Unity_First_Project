@@ -7,6 +7,7 @@ public class PlayerControler : MonoBehaviour
     Rigidbody myRB;
     Camera playercam;
     Vector2 camRotation;
+    Transform cameraHolder;
 
     [Header("Player Stats")]
     public bool takenDamage = false;
@@ -49,7 +50,10 @@ public class PlayerControler : MonoBehaviour
     void Start()
     {
         myRB = GetComponent<Rigidbody>();
-        playercam = transform.GetChild(0).GetComponent<Camera>();
+        playercam = Camera.main;
+        cameraHolder = transform.GetChild(0);
+
+        
         Cursor.visible = false;
         camRotation = Vector2.zero;
         Cursor.lockState = CursorLockMode.Confined;
@@ -66,6 +70,7 @@ public class PlayerControler : MonoBehaviour
         camRotation.x += Input.GetAxisRaw("Mouse X") * mouseSensitivity;
         camRotation.y += Input.GetAxisRaw("Mouse Y") * mouseSensitivity;
         camRotation.y = Mathf.Clamp(camRotation.y, -90, 90);
+        playercam.transform.position = cameraHolder.position;
 
         if (Input.GetMouseButton(0) && canFire && currentClip > 0 && weaponID >= 0)
         {
@@ -80,7 +85,7 @@ public class PlayerControler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
             reloadClip();
 
-        playercam.transform.localRotation = Quaternion.AngleAxis(camRotation.y, Vector3.left);
+        playercam.transform.rotation = Quaternion.Euler(-camRotation.y, camRotation.x, 0);
         transform.localRotation = Quaternion.AngleAxis(camRotation.x, Vector3.up);
         if (!sprinting && !sprintToggle && Input.GetKey(KeyCode.LeftShift))
             sprinting = true;
@@ -166,7 +171,7 @@ public class PlayerControler : MonoBehaviour
                     currentClip = 50;
                     currentAmmo = 200;
                     reloadAmt = 50;
-                    bulletLifespan = .1f;
+                    bulletLifespan = 1f;
                     break;
 
                 default:
