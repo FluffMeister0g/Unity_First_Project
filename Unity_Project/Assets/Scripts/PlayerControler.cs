@@ -144,9 +144,9 @@ public class PlayerControler : MonoBehaviour
                     weaponID = 0;
                     shotVel = 10000;
                     fireMode = 0;
-                    fireRate = 0.1f;
+                    fireRate = 0.5f;
                     currentClip = 20;
-                    currentAmmo = 200;
+                    currentAmmo = 40;
                     reloadAmt = 20;
                     bulletLifespan = .5f;
                     break;
@@ -168,8 +168,8 @@ public class PlayerControler : MonoBehaviour
                     shotVel = 10000;
                     fireMode = 0;
                     fireRate = 0.00000000000001f;
-                    currentClip = 50;
-                    currentAmmo = 200;
+                    currentClip = 20;
+                    currentAmmo = 80;
                     reloadAmt = 50;
                     bulletLifespan = 1f;
                     break;
