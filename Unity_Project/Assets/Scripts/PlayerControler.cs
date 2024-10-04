@@ -12,7 +12,7 @@ public class PlayerControler : MonoBehaviour
     [Header("Player Stats")]
     public bool takenDamage = false;
     public float damageCooldownTimer = 1f;
-    public int health = 5;
+    public int health = 10;
     public int maxHealth = 10;
     public int healthPickupAmt = 5;
     [Header("Weapon Stats")]

@@ -60,5 +60,6 @@ public class GameManager : MonoBehaviour
     public void LoadLevel(int sceneID)
     {
         SceneManager.LoadScene(sceneID);
+        Time.timeScale = 1;
     }
 }
