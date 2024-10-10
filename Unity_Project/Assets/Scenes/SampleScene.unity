@@ -630,9 +630,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 829d3d89da451e34f837eb4d6fb2a8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: []
+  enemies:
+  - enemyPrefab: {fileID: 2065267604}
+    cost: 1
   currWave: 0
-  waveValue: 0
+  waveValue: 10
   enemiesToSpawn: []
   spawnLocation: {fileID: 0}
   waveDuration: 0
