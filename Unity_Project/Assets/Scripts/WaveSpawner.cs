@@ -20,7 +20,7 @@ public class WaveSpawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void fixedUpdate()
+    void FixedUpdate()
     {
         if(spawnTimer <=0)
         {
