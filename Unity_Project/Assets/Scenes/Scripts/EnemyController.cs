@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     public PlayerControler player;
     public NavMeshAgent agent;
-
+   
     [Header("Enemy Stats")]
     public int health = 3;
     public int maxHealth = 5;
@@ -21,12 +21,13 @@ public class EnemyController : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<PlayerControler>();
         agent = GetComponent<NavMeshAgent>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+       
         agent.destination = player.transform.position;
         
         if (health <= 0)
