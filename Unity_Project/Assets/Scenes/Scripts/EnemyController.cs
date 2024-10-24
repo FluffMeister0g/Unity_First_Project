@@ -31,7 +31,16 @@ public class EnemyController : MonoBehaviour
         agent.destination = player.transform.position;
         
         if (health <= 0)
+        {
+            
             Destroy(gameObject);
+            
+        }
+            
+    }
+    private void OnDestroy()
+    {
+        
     }
     private void OnCollisionEnter(Collision collision)
     {
