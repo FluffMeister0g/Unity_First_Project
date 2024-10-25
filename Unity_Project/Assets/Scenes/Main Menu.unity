@@ -1279,6 +1279,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5bc521f9a4a5494f903723dbd4355cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerText: {fileID: 0}
+  secondsCount: 0
+  minuteCount: 0
   isPaused: 0
   pauseMenu: {fileID: 0}
   playerData: {fileID: 0}
