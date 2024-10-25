@@ -64,9 +64,7 @@ public class PlayerControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-       // camera movement
+        // camera movement
         Quaternion mouseLook = playercam.transform.rotation;
         camRotation.x += Input.GetAxisRaw("Mouse X") * mouseSensitivity;
         camRotation.y += Input.GetAxisRaw("Mouse Y") * mouseSensitivity;
